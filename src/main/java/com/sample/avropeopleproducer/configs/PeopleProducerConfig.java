@@ -36,4 +36,15 @@ public class PeopleProducerConfig {
         );
     }
 
+    @Bean
+    public ProducerFactory<String, Person> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    }
+
+    @Bean
+    public KafkaTemplate<String, Person> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+
+
 }
