@@ -45,7 +45,15 @@ public class PeopleController {
                     person
             );
 
-
+            future.handle(
+                    (result, ex) -> {
+                        if (result != null) {
+                            logger.info("Produced: {}", person);
+                        } else {
+                            logger.error("Failed  to produce: {}", person, ex);
+                        }
+                    }
+            );
 
 //            future.addCallback(
 //                    result -> {},
