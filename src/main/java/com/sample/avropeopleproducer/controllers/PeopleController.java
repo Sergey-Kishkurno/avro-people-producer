@@ -33,6 +33,7 @@ public class PeopleController {
         logger.info("Creating people cmd " + cmd);
         List<PersonDto> people = new ArrayList<>();
         var faker = new Faker();
+
         for (var i=0; i < cmd.getCount(); i++) {
             var person = new Person();
             person.setName(faker.name().fullName());
@@ -45,11 +46,6 @@ public class PeopleController {
                     person
             );
 
-//            future.handle(
-//                    result -> { logger.info("Produced: {}", person); return; },
-//                    ex -> { logger.error("Failed  to produce:" + person, ex); return; }
-//            );
-
             future.handle(
                     (result, ex) -> {
                         if (result != null) {
@@ -61,9 +57,10 @@ public class PeopleController {
                     }
             );
 
+//  ---------- In previous versions  of Kafka for Spring Boot the following callback was used:
 //            future.addCallback(
-//                    result -> {},
-//                    ex -> {}
+//                    result -> { logger.info("Produced: {}", person); },
+//                    ex -> { logger.error("Failed  to produce: {}", person, ex); }
 //            );
         }
         kafkaTemplate.flush();
