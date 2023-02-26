@@ -63,6 +63,7 @@ public class PeopleController {
 //                    ex -> { logger.error("Failed  to produce: {}", person, ex); }
 //            );
         }
+
         kafkaTemplate.flush();
 
         return people;
