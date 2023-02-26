@@ -45,6 +45,11 @@ public class PeopleController {
                     person
             );
 
+//            future.handle(
+//                    result -> { logger.info("Produced: {}", person); return; },
+//                    ex -> { logger.error("Failed  to produce:" + person, ex); return; }
+//            );
+
             future.handle(
                     (result, ex) -> {
                         if (result != null) {
@@ -52,6 +57,7 @@ public class PeopleController {
                         } else {
                             logger.error("Failed  to produce: {}", person, ex);
                         }
+                        return null;
                     }
             );
 
