@@ -45,10 +45,12 @@ public class PeopleController {
                     person
             );
 
-            future.addCallback(
-                    result -> {},
-                    ex -> {}
-            );
+
+
+//            future.addCallback(
+//                    result -> {},
+//                    ex -> {}
+//            );
         }
         kafkaTemplate.flush();
 
